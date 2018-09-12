@@ -25,7 +25,7 @@ import (
 	"github.com/creativesoftwarefdn/weaviate/schema"
 )
 
-// BaseConnector is the interface that all connectors should have, cache or DB
+// BaseConnector is the interface that all connectors should have
 type BaseConnector interface {
 	Connect() error
 	Init() error
@@ -68,11 +68,4 @@ type DatabaseConnector interface {
 	GetThings(ctx context.Context, UUIDs []strfmt.UUID, thingResponse *models.ThingsListResponse) error
 	GetActions(ctx context.Context, UUIDs []strfmt.UUID, actionResponse *models.ActionsListResponse) error
 	GetKeys(ctx context.Context, UUIDs []strfmt.UUID, keyResponse *[]*models.KeyGetResponse) error
-}
-
-// CacheConnector is the interface that all cache-connectors should have
-type CacheConnector interface {
-	DatabaseConnector
-
-	SetDatabaseConnector(dbConnector DatabaseConnector)
 }

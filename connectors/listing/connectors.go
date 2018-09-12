@@ -16,11 +16,3 @@ func GetAllConnectors() []dbconnector.DatabaseConnector {
 
 	return connectors
 }
-
-// GetAllCacheConnectors contains all available cache-connectors
-func GetAllCacheConnectors() []dbconnector.CacheConnector {
-	// Set all existing connectors
-	connectors := []dbconnector.CacheConnector{}
-
-	return connectors
-}

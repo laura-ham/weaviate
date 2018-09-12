@@ -159,7 +159,6 @@ func deleteKey(ctx context.Context, databaseConnector dbconnector.DatabaseConnec
 func CreateDatabaseConnector(env *config.Environment) dbconnector.DatabaseConnector {
 	// Get all connectors
 	connectors := dblisting.GetAllConnectors()
-	cacheConnectors := dblisting.GetAllCacheConnectors()
 
 	// Init the db-connector variable
 	var connector dbconnector.DatabaseConnector
@@ -169,16 +168,6 @@ func CreateDatabaseConnector(env *config.Environment) dbconnector.DatabaseConnec
 		if c.GetName() == env.Database.Name {
 			messaging.InfoMessage(fmt.Sprintf("Using database '%s'", env.Database.Name))
 			connector = c
-			break
-		}
-	}
-
-	// Loop through all cache-connectors and determine its name
-	for _, cc := range cacheConnectors {
-		if cc.GetName() == env.Cache.Name {
-			messaging.InfoMessage(fmt.Sprintf("Using cache layer '%s'", env.Cache.Name))
-			cc.SetDatabaseConnector(connector)
-			connector = cc
 			break
 		}
 	}
